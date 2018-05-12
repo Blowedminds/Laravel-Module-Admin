@@ -1,39 +1,39 @@
 <?php
 
-Route::get('users', 'AdminPanelController@getUsers');
+Route::get('users', 'AdminController@getUsers');
 
-Route::get('user/{user_id}', 'AdminPanelController@getUser');
+Route::get('user/{user_id}', 'AdminController@getUser');
 
-Route::post('user/{user_id}', 'AdminPanelController@postUser');
+Route::post('user/{user_id}', 'AdminController@postUser');
 
-Route::delete('user/{user_id}', 'AdminPanelController@deleteUser');
+Route::delete('user/{user_id}', 'AdminController@deleteUser');
 
-Route::post('users', 'AdminPanelController@postUser');
+Route::post('users', 'AdminController@postUser');
 
-Route::put('users', 'AdminPanelController@putUser');
+Route::put('users', 'AdminController@putUser');
 
-Route::get('menus', 'AdminPanelController@getMenus');
+Route::get('menus', 'AdminController@getMenus');
 
-Route::post('menus', 'AdminPanelController@postMenu');
+Route::post('menus', 'AdminController@postMenu');
 
-Route::put('menus', 'AdminPanelController@putMenu');
+Route::put('menus', 'AdminController@putMenu');
 
-Route::delete('menus/{id}', 'AdminPanelController@deleteMenu');
+Route::delete('menus/{id}', 'AdminController@deleteMenu');
 
-Route::get('categories', 'AdminPanelController@getCategories');
+Route::get('categories', 'AdminController@getCategories');
 
-Route::post('categories/{category_id}', 'AdminPanelController@postCategory');
+Route::post('categories/{category_id}', 'AdminController@postCategory');
 
-Route::put('categories', 'AdminPanelController@putCategory');
+Route::put('categories', 'AdminController@putCategory');
 
-Route::delete('categories/{id}', 'AdminPanelController@deleteCategory');
+Route::delete('categories/{id}', 'AdminController@deleteCategory');
 
-Route::get('languages', 'AdminPanelController@getLanguages');
+Route::get('languages', 'AdminController@getLanguages');
 
-Route::post('languages', 'AdminPanelController@postLanguage');
+Route::post('languages', 'AdminController@postLanguage');
 
-Route::put('languages', 'AdminPanelController@putLanguage');
+Route::put('languages', 'AdminController@putLanguage');
 
-Route::delete('languages/{id}', 'AdminPanelController@deleteLanguage');
+Route::delete('languages/{id}', 'AdminController@deleteLanguage');
 
-Route::get('roles', 'AdminPanelController@getRoles');
+Route::get('roles', 'AdminController@getRoles');

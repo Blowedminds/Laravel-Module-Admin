@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Editor\AdminPanel\Http\Controllers;
+namespace App\Modules\Editor\Admin\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use App\Language;
 use App\Role;
 use App\MenuRole;
 
-class AdminPanelController extends Controller
+class AdminController extends Controller
 {
 
     public function __construct()
