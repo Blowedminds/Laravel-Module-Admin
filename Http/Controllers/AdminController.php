@@ -2,14 +2,14 @@
 
 namespace App\Modules\Editor\Admin\Http\Controllers;
 
-use App\User;
+use App\Modules\Core\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Menu;
-use App\Category;
-use App\Language;
-use App\Role;
-use App\MenuRole;
+use App\Modules\Core\Menu;
+use App\Modules\Core\Category;
+use App\Modules\Core\Language;
+use App\Modules\Core\Role;
+use App\Modules\Core\MenuRole;
 
 class AdminController extends Controller
 {
