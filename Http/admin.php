@@ -1,39 +1,60 @@
 <?php
 
-Route::get('users', 'AdminController@getUsers');
+Route::get('users', 'UserController@getUsers');
 
-Route::get('user/{user_id}', 'AdminController@getUser');
+Route::get('user/{user_id}', 'UserController@getUser');
 
-Route::post('user/{user_id}', 'AdminController@postUser');
+Route::post('user/{user_id}', 'UserController@postUser');
 
-Route::delete('user/{user_id}', 'AdminController@deleteUser');
+Route::delete('user/{user_id}', 'UserController@deleteUser');
 
-Route::post('users', 'AdminController@postUser');
+Route::post('users', 'UserController@postUser');
 
-Route::put('users', 'AdminController@putUser');
+Route::put('users', 'UserController@putUser');
 
-Route::get('menus', 'AdminController@getMenus');
 
-Route::post('menus', 'AdminController@postMenu');
+Route::get('menus', 'MenuController@getMenus');
 
-Route::put('menus', 'AdminController@putMenu');
+Route::post('menus', 'MenuController@postMenu');
 
-Route::delete('menus/{id}', 'AdminController@deleteMenu');
+Route::put('menus', 'MenuController@putMenu');
 
-Route::get('categories', 'AdminController@getCategories');
+Route::delete('menus/{id}', 'MenuController@deleteMenu');
 
-Route::post('categories/{category_id}', 'AdminController@postCategory');
 
-Route::put('categories', 'AdminController@putCategory');
+Route::get('categories', 'CategoryController@getCategories');
 
-Route::delete('categories/{id}', 'AdminController@deleteCategory');
+Route::post('categories/{category_id}', 'CategoryController@postCategory');
 
-Route::get('languages', 'AdminController@getLanguages');
+Route::put('categories', 'CategoryController@putCategory');
 
-Route::post('languages', 'AdminController@postLanguage');
+Route::delete('categories/{id}', 'CategoryController@deleteCategory');
 
-Route::put('languages', 'AdminController@putLanguage');
 
-Route::delete('languages/{id}', 'AdminController@deleteLanguage');
+Route::get('languages', 'LanguageController@getLanguages');
 
-Route::get('roles', 'AdminController@getRoles');
+Route::post('languages', 'LanguageController@postLanguage');
+
+Route::put('languages', 'LanguageController@putLanguage');
+
+Route::delete('languages/{id}', 'LanguageController@deleteLanguage');
+
+
+Route::get('roles', 'RoleController@getRoles');
+
+Route::get('role/{id}', 'RoleController@getRole');
+
+Route::post('role/{id}', 'RoleController@postRole');
+
+Route::put('role', 'RoleController@putRole');
+
+Route::delete('role/{id}', 'RoleController@deleteRole');
+
+
+Route::get('permissions', 'PermissionController@getPermissions');
+
+Route::post('permission/{id}', 'PermissionController@postPermission');
+
+Route::put('permission', 'PermissionController@putPermission');
+
+Route::delete('permission/{id}', 'PermissionController@deletePermission');
