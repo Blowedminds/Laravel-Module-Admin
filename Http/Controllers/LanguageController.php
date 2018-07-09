@@ -4,7 +4,7 @@ namespace App\Modules\Editor\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Core\Language;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
