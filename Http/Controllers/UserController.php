@@ -3,6 +3,7 @@
 namespace App\Modules\Editor\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Core\Role;
 use App\Modules\Core\User;
 
 class UserController extends Controller
