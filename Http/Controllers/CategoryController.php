@@ -51,21 +51,21 @@ class CategoryController extends Controller
         return response()->json(['TEBRIKLER']);
     }
 
-    public function putCategory(Request $request)
+    public function putCategory()
     {
-        $this->validate($request, [
+        request()->validate([
             'name' => 'required',
             'description' => 'required',
             'slug' => 'required'
         ]);
 
         $category = Category::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'slug' => $request->input('slug')
+            'name' => request()->input('name'),
+            'description' => request()->input('description'),
+            'slug' => request()->input('slug')
         ]);
 
-        return response()->json(['TEBRIKLER']);
+        return response()->json($category);
     }
 
     public function deleteCategory($id)
