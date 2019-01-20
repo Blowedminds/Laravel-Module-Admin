@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Editor\Admin\Http\Controllers;
+namespace App\Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Core\Role;
