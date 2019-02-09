@@ -20,10 +20,6 @@ class MenuController extends Controller
     {
         $menus = Menu::with(['menuRoles'])->get()->map(function ($menu) {
 
-            $menu_roles = $menu->menuRoles->map(function ($menu_role) {
-                return ['id' => $menu_role->role_id];
-            })->toArray();
-
             return [
                 'id' => $menu->id,
                 'name' => $this->fillEmptyLocalizedMenu($menu->name ?? []),
@@ -31,9 +27,32 @@ class MenuController extends Controller
                 'tooltip' => $this->fillEmptyLocalizedMenu($menu->tooltip ?? []),
                 'url' => $menu->url,
                 'weight' => $menu->weight,
-                'roles' => $menu_roles
+                'roles' => $menu->menuRoles,
+                'children' => []
             ];
         })->toArray();
+
+        for ($i = 0, $count = count($menus); $i < $count; $i++) {
+
+            $menu = array_pop($menus);
+
+            $placed = false;
+
+            foreach ($menus as $key => $target) {
+                if ($this->recurseMenus($menus[$key], $menu)) {
+                    $placed = true;
+                    break;
+                }
+            }
+
+            if (!$placed) {
+                array_unshift($menus, $menu);
+            }
+        }
+
+        usort($menus, function ($a, $b) {
+            return $a['weight'] - $b['weight'];
+        });
 
         usort($menus, function ($a, $b) {
             return $a['weight'] - $b['weight'];
@@ -135,5 +154,21 @@ class MenuController extends Controller
         }
 
         return $filled_menus;
+    }
+
+    private function recurseMenus(&$target, &$menu)
+    {
+        if ($menu['parent'] === $target['id']) {
+            $target['children'][] = $menu;
+            return true;
+        }
+
+        foreach ($target['children'] as $key => $child) {
+            if ($this->recurseMenus($target['children'][$key], $menu)) {
+                return true;
+            };
+        }
+
+        return false;
     }
 }
