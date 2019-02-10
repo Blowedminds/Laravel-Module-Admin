@@ -18,7 +18,9 @@ class MenuController extends Controller
 
     public function getMenus()
     {
-        $menus = Menu::with(['menuRoles'])->get()->map(function ($menu) {
+        $menus = Menu::with(['menuRoles'])
+            ->orderBy('weight', 'DESC')
+            ->get()->map(function ($menu) {
 
             return [
                 'id' => $menu->id,
