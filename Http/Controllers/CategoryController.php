@@ -11,7 +11,7 @@ class CategoryController extends Controller
     {
         $this->middleware('auth:api');
 
-        $this->middleware('admin')->except([
+        $this->middleware('permission:ownership.category')->except([
             'getCategories'
         ]);
     }

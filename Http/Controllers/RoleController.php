@@ -10,7 +10,7 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api', 'permission:ownership.role']);
     }
 
     public function getRoles()
@@ -29,7 +29,7 @@ class RoleController extends Controller
             'name' => 'required',
             'slug' => 'required',
             'description' => 'required',
-            'permissions' => 'required|array'
+            'permissions' => 'array'
         ]);
 
         $role = Role::findOrFail($id);

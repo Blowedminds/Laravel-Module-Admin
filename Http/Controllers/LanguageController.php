@@ -12,7 +12,7 @@ class LanguageController extends Controller
     {
         $this->middleware('auth:api');
 
-        $this->middleware('admin')->except([
+        $this->middleware('permission:ownership.language')->except([
             'getLanguages'
         ]);
     }

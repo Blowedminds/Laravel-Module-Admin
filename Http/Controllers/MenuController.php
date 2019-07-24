@@ -13,7 +13,7 @@ class MenuController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api', 'permission:ownership.menu']);
     }
 
     public function getMenus()
