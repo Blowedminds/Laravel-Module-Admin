@@ -3,10 +3,8 @@
 namespace App\Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Core\Language;
 use App\Modules\Core\Menu;
 use App\Modules\Core\MenuRole;
-use App\Modules\Core\Role;
 use App\Modules\Core\Traits\MenuTrait;
 use Illuminate\Http\Request;
 
@@ -41,44 +39,7 @@ class MenuController extends Controller
         return response()->json($menus);
     }
 
-    public function postMenu()
-    {
-        $menuUpdateKeys = [
-            'name' => 'required',
-            'url' => 'required',
-            'tooltip' => 'required',
-            'weight' => 'required',
-            'parent' => 'required'
-        ];
-
-        request()->validate(array_merge([
-            'id' => 'required',
-            'roles' => 'required'
-        ], $menuUpdateKeys));
-
-        $menu = Menu::findOrFail(request()->input('id'));
-
-        foreach ($menuUpdateKeys as $key => $value) {
-
-            $menu->{$key} = request()->input($key);
-        }
-
-        MenuRole::where('menu_id', request()->input('id'))->forceDelete();
-
-        foreach (request()->input('roles') as $key => $value) {
-
-            MenuRole::create([
-                'menu_id' => $menu->id,
-                'role_id' => (int)$value['id']
-            ]);
-        }
-
-        $menu->save();
-
-        return response()->json([]);
-    }
-
-    public function putMenu(Request $request)
+    public function postMenu(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -95,11 +56,38 @@ class MenuController extends Controller
             foreach ($request->input('roles') as $key => $value) {
                 MenuRole::create([
                     'menu_id' => $menu->id,
-                    'role_id' => $value['id']
+                    'role_id' => $value
                 ]);
             }
 
         return response()->json([]);
+    }
+
+    public function putMenu($menu_id)
+    {
+        request()->validate([
+            'name' => 'required',
+            'url' => 'required',
+            'tooltip' => 'required',
+            'weight' => 'required',
+            'parent' => 'required',
+            'roles' => 'array'
+        ]);
+
+        $menu = Menu::findOrFail($menu_id);
+
+        $menu->update(request()->only(['name', 'url', 'tooltip', 'weight', 'parent']));
+
+        MenuRole::where('menu_id', request()->input('id'))->forceDelete();
+
+        foreach (request()->input('roles') as $key => $value) {
+            MenuRole::create([
+                'menu_id' => $menu->id,
+                'role_id' => (int)$value
+            ]);
+        }
+
+        return response()->json();
     }
 
     public function deleteMenu($id)

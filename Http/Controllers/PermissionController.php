@@ -17,20 +17,7 @@ class PermissionController extends Controller
         return response()->json(Permission::all());
     }
 
-    public function postPermission($permission_id)
-    {
-        request()->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'description' => 'required'
-        ]);
-
-        Permission::findOrFail($permission_id)->update(request()->only(['name', 'slug', 'description']));
-
-        return response()->json('success');
-    }
-
-    public function putPermission()
+    public function postPermission()
     {
         request()->validate([
             'name' => 'required',
@@ -39,6 +26,19 @@ class PermissionController extends Controller
         ]);
 
         Permission::create(request()->only(['name', 'slug', 'description']));
+
+        return response()->json('success');
+    }
+
+    public function putPermission($permission_id)
+    {
+        request()->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'description' => 'required'
+        ]);
+
+        Permission::findOrFail($permission_id)->update(request()->only(['name', 'slug', 'description']));
 
         return response()->json('success');
     }

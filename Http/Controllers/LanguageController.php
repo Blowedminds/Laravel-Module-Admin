@@ -30,40 +30,30 @@ class LanguageController extends Controller
         return response()->json($languages);
     }
 
-    public function postLanguage(Request $request)
+    public function putLanguage($language_id)
     {
-        $this->validate($request, [
-            'id' => 'required',
+        request()->validate([
             'name' => 'required',
             'slug' => 'required'
         ]);
 
-        if (!$language = Language::find(intval($request->input('id')))) return;
+        $language = Language::findOrFail($language_id);
 
-        $language->name = $request->input('name');
+        $language->update(request()->only(['name', 'slug']));
 
-        $language->slug = $request->input('slug');
-
-        $language->save();
-
-        return response()->json(['TEBRIKLER']);
+        return response()->json();
     }
 
-    public function putLanguage(Request $request)
+    public function postLanguage()
     {
-        $this->validate($request, [
+        request()->validate([
             'name' => 'required',
             'slug' => 'required'
         ]);
 
-        if ($language = Language::where('slug', $request->input('slug'))->first()) return;
+        Language::create(request()->only(['name', 'slug']));
 
-        $language = Language::create([
-            'name' => $request->input('name'),
-            'slug' => $request->input('slug')
-        ]);
-
-        return response()->json(['TEBRIKLER']);
+        return response()->json();
     }
 
     public function deleteLanguage($id)

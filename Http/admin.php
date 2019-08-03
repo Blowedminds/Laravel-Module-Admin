@@ -4,57 +4,55 @@ Route::get('users', 'UserController@getUsers');
 
 Route::get('user/{user_id}', 'UserController@getUser');
 
-Route::post('user/{user_id}', 'UserController@postUser');
+Route::post('user', 'UserController@postUser');
+
+Route::put('user/{user_id}', 'UserController@putUser');
 
 Route::delete('user/{user_id}', 'UserController@deleteUser');
-
-Route::post('users', 'UserController@postUser');
-
-Route::put('users', 'UserController@putUser');
 
 
 Route::get('menus', 'MenuController@getMenus');
 
-Route::post('menus', 'MenuController@postMenu');
+Route::post('menu', 'MenuController@postMenu');
 
-Route::put('menus', 'MenuController@putMenu');
+Route::put('menu/{menu_id}', 'MenuController@putMenu');
 
-Route::delete('menus/{id}', 'MenuController@deleteMenu');
+Route::delete('menu/{menu_id}', 'MenuController@deleteMenu');
 
 
 Route::get('categories', 'CategoryController@getCategories');
 
-Route::post('categories/{category_id}', 'CategoryController@postCategory');
+Route::post('category', 'CategoryController@postCategory');
 
-Route::put('categories', 'CategoryController@putCategory');
+Route::put('category/{category_id}', 'CategoryController@putCategory');
 
-Route::delete('categories/{id}', 'CategoryController@deleteCategory');
+Route::delete('category/{category_id}', 'CategoryController@deleteCategory');
 
 
 Route::get('languages', 'LanguageController@getLanguages');
 
-Route::post('languages', 'LanguageController@postLanguage');
+Route::post('language', 'LanguageController@postLanguage');
 
-Route::put('languages', 'LanguageController@putLanguage');
+Route::put('language/{language_id}', 'LanguageController@putLanguage');
 
-Route::delete('languages/{id}', 'LanguageController@deleteLanguage');
+Route::delete('language/{language_id}', 'LanguageController@deleteLanguage');
 
 
 Route::get('roles', 'RoleController@getRoles');
 
-Route::get('role/{id}', 'RoleController@getRole');
+Route::get('role/{role_id}', 'RoleController@getRole');
 
-Route::post('role/{id}', 'RoleController@postRole');
+Route::post('role', 'RoleController@postRole');
 
-Route::put('role', 'RoleController@putRole');
+Route::put('role/{role_id}', 'RoleController@putRole');
 
-Route::delete('role/{id}', 'RoleController@deleteRole');
+Route::delete('role/{role_id}', 'RoleController@deleteRole');
 
 
 Route::get('permissions', 'PermissionController@getPermissions');
 
-Route::post('permission/{id}', 'PermissionController@postPermission');
+Route::post('permission', 'PermissionController@postPermission');
 
-Route::put('permission', 'PermissionController@putPermission');
+Route::put('permission/{permission_id}', 'PermissionController@putPermission');
 
-Route::delete('permission/{id}', 'PermissionController@deletePermission');
+Route::delete('permission/{permission_id}', 'PermissionController@deletePermission');

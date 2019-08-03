@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function getUsers()
     {
-        return response()->json(User::all());
+        return User::all();
     }
 
     public function getUser($user_id)
@@ -29,7 +29,17 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function postUser($user_id)
+    public function postUser()
+    {
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+        return response()->json();
+    }
+
+    public function putUser($user_id)
     {
         request()->validate([
             'name' => 'required',
@@ -39,30 +49,19 @@ class UserController extends Controller
 
         $user = User::findOrFail($user_id);
 
-        $user->name = request()->input('name');
+        $user->update(request()->only(['name', 'email']));
 
-        $user->email = request()->input('email');
+        $role = Role::findOrFail(request()->input('role_id'))->id;
 
-        $user->userData->role_id = Role::findOrFail(request()->input('role_id'))->id;
+        $user->userData->update(['role_id' => $role]);
 
-        $user->userData->save();
-        $user->save();
-
-        return response()->json([]);
-    }
-
-    public function putUser()
-    {
-        request()->validate([
-            'name' => 'required',
-            'email' => 'required'
-        ]);
+        return response()->json();
     }
 
     public function deleteUser($user_id)
     {
         User::where('user_id', $user_id)->firstOrFail()->delete();
 
-        return response()->json('success');
+        return response()->json();
     }
 }

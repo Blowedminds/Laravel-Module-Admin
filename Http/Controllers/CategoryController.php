@@ -30,7 +30,20 @@ class CategoryController extends Controller
         return response()->json($categories);
     }
 
-    public function postCategory($category_id)
+    public function postCategory()
+    {
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'slug' => 'required'
+        ]);
+
+        Category::create(request()->only(['name', 'description', 'slug']));
+
+        return response()->json();
+    }
+
+    public function putCategory($category_id)
     {
         request()->validate([
             'name' => 'required',
@@ -49,23 +62,6 @@ class CategoryController extends Controller
         $category->save();
 
         return response()->json(['TEBRIKLER']);
-    }
-
-    public function putCategory()
-    {
-        request()->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'slug' => 'required'
-        ]);
-
-        $category = Category::create([
-            'name' => request()->input('name'),
-            'description' => request()->input('description'),
-            'slug' => request()->input('slug')
-        ]);
-
-        return response()->json($category);
     }
 
     public function deleteCategory($id)

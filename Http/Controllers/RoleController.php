@@ -15,51 +15,21 @@ class RoleController extends Controller
 
     public function getRoles()
     {
-        return response()->json(Role::with('permissions')->get());
+        return Role::with('permissions')->get();
     }
 
-    public function getRole($id)
+    public function getRole($role_id)
     {
-        return Role::findOrFail($id);
+        return Role::findOrFail($role_id);
     }
 
-    public function postRole($id)
+    public function postRole()
     {
         request()->validate([
             'name' => 'required',
             'slug' => 'required',
             'description' => 'required',
             'permissions' => 'array'
-        ]);
-
-        $role = Role::findOrFail($id);
-
-        RolePermission::where('role_id', $role->id)->forceDelete();
-
-        foreach (request()->get('permissions') as $key => $value) {
-            RolePermission::create([
-                'role_id' => $role->id,
-                'permission_id' => $value
-            ]);
-        }
-
-        $role->fill(request()->only(['name', 'slug', 'description']));
-
-        return response()->json([
-            'header' => 'İşlem Başarılı',
-            'message' => 'Rol güncellendi',
-            'state' => 'success',
-            'action' => 'Tamam'
-        ]);
-    }
-
-    public function putRole()
-    {
-        request()->validate([
-            'name' => 'required',
-            'slug' => 'required',
-            'description' => 'required',
-            'permissions' => 'array|required'
         ]);
 
         $role = Role::create(request()->only(['name', 'slug', 'description']));
@@ -70,27 +40,42 @@ class RoleController extends Controller
                 'permission_id' => $permission
             ]);
         }
-        return response()->json([
-            'header' => 'İşlem Başarılı',
-            'message' => 'Rol Eklendi',
-            'state' => 'success',
-            'action' => 'Tamam'
-        ]);
+        return response()->json();
     }
 
-    public function deleteRole($id)
+    public function putRole($role_id)
     {
-        $role = Role::findOrFail($id);
+        request()->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'permissions' => 'array'
+        ]);
+
+        $role = Role::findOrFail($role_id);
+
+        RolePermission::where('role_id', $role->id)->forceDelete();
+
+        foreach (request()->get('permissions') as $key => $value) {
+            RolePermission::create([
+                'role_id' => $role->id,
+                'permission_id' => $value
+            ]);
+        }
+
+        $role->update(request()->only(['name', 'slug', 'description']));
+
+        return response()->json();
+    }
+
+    public function deleteRole($role_id)
+    {
+        $role = Role::findOrFail($role_id);
 
         RolePermission::where('role_id', $role->id)->delete();
 
         $role->delete();
 
-        return response()->json([
-            'header' => 'İşlem Başarılı',
-            'message' => 'Rol Silindi',
-            'state' => 'success',
-            'action' => 'Tamam'
-        ]);
+        return response()->json();
     }
 }
