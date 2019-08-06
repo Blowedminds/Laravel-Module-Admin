@@ -18,16 +18,7 @@ class CategoryController extends Controller
 
     public function getCategories()
     {
-        $categories = Category::all()->map(function ($category) {
-            return [
-                'id' => $category->id,
-                'name' => $category->name,
-                'slug' => $category->slug,
-                'description' => $category->description
-            ];
-        });
-
-        return response()->json($categories);
+        return Category::all();
     }
 
     public function postCategory()
