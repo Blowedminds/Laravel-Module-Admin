@@ -60,7 +60,7 @@ class MenuController extends Controller
                 ]);
             }
 
-        return response()->json([]);
+        return response()->json();
     }
 
     public function putMenu($menu_id)
@@ -94,6 +94,6 @@ class MenuController extends Controller
     {
         Menu::findOrFail($id)->forceDelete();
 
-        return response()->json([]);
+        return response()->json();
     }
 }

@@ -56,12 +56,10 @@ class LanguageController extends Controller
         return response()->json();
     }
 
-    public function deleteLanguage($id)
+    public function deleteLanguage($language_id)
     {
-        if (!$language = Language::find(intval($id))) return;
+        Language::findOrFail($language_id)->forceDelete();
 
-        $language->forceDelete();
-
-        return response()->json(['TEBRIKLER']);
+        return response()->json();
     }
 }

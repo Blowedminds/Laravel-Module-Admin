@@ -40,11 +40,13 @@ class PermissionController extends Controller
 
         Permission::findOrFail($permission_id)->update(request()->only(['name', 'slug', 'description']));
 
-        return response()->json('success');
+        return response()->json();
     }
 
     public function deletePermission($permission_id)
     {
         Permission::findOrFail($permission_id)->forceDelete();
+
+        return response()->json();
     }
 }

@@ -53,22 +53,16 @@ class CategoryController extends Controller
 
         $category = Category::findOrFail($category_id);
 
-        $category->name = request()->input('name');
+        $category->update(request()->only(['name', 'description', 'slug']));
 
-        $category->description = request()->input('description');
-
-        $category->slug = request()->input('slug');
-
-        $category->save();
-
-        return response()->json(['TEBRIKLER']);
+        return response()->json();
     }
 
     public function deleteCategory($id)
     {
         Category::findOrFail($id)->forceDelete();
 
-        return response()->json(['TEBRIKLER']);
+        return response()->json();
     }
 
 }
