@@ -4,24 +4,14 @@
 namespace App\Modules\Admin\Tests\Feature;
 
 
-use App\Modules\Core\User;
 use App\Modules\Core\Traits\MenuTrait;
 use Tests\TestCase;
 
-class AdminControllerTest extends TestCase
+class AdminModuleTest extends TestCase
 {
     use MenuTrait;
 
-    private $user;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->user = factory(User::class)->make();
-    }
-
-    public function testPutChildrenIntoParents()
+    public function testPutChildrenIntoParents(): void
     {
         //Empty
         $this->assertEquals($this->putChildrenIntoParents([]), []);

@@ -1,58 +1,76 @@
 <?php
 
-Route::get('users', 'UserController@getUsers');
+Route::group(['prefix' => 'user'], function () {
+    Route::get('users', 'UserController@getUsers');
 
-Route::get('user/{user_id}', 'UserController@getUser');
+    Route::get('user/{user_id}', 'UserController@getUser');
 
-Route::post('user', 'UserController@postUser');
+    Route::post('user', 'UserController@postUser');
 
-Route::put('user/{user_id}', 'UserController@putUser');
+    Route::put('user/{user_id}', 'UserController@putUser');
 
-Route::delete('user/{user_id}', 'UserController@deleteUser');
+    Route::delete('user/{user_id}', 'UserController@deleteUser');
+});
 
+Route::group(['prefix' => 'menu'], function () {
+    Route::get('menus', 'MenuController@getMenus');
 
-Route::get('menus', 'MenuController@getMenus');
+    Route::post('menu', 'MenuController@postMenu');
 
-Route::post('menu', 'MenuController@postMenu');
+    Route::put('menu/{menu_id}', 'MenuController@putMenu');
 
-Route::put('menu/{menu_id}', 'MenuController@putMenu');
+    Route::delete('menu/{menu_id}', 'MenuController@deleteMenu');
+});
 
-Route::delete('menu/{menu_id}', 'MenuController@deleteMenu');
+Route::group(['prefix' => 'category'], function () {
+    Route::get('categories', 'CategoryController@getCategories');
 
+    Route::post('category', 'CategoryController@postCategory');
 
-Route::get('categories', 'CategoryController@getCategories');
+    Route::put('category/{category_id}', 'CategoryController@putCategory');
 
-Route::post('category', 'CategoryController@postCategory');
+    Route::delete('category/{category_id}', 'CategoryController@deleteCategory');
+});
 
-Route::put('category/{category_id}', 'CategoryController@putCategory');
+Route::group(['prefix' => 'language'], function () {
+    Route::get('languages', 'LanguageController@getLanguages');
 
-Route::delete('category/{category_id}', 'CategoryController@deleteCategory');
+    Route::post('language', 'LanguageController@postLanguage');
 
+    Route::put('language/{language_id}', 'LanguageController@putLanguage');
 
-Route::get('languages', 'LanguageController@getLanguages');
+    Route::delete('language/{language_id}', 'LanguageController@deleteLanguage');
+});
 
-Route::post('language', 'LanguageController@postLanguage');
+Route::group(['prefix' => 'role'], function () {
+    Route::get('roles', 'RoleController@getRoles');
 
-Route::put('language/{language_id}', 'LanguageController@putLanguage');
+    Route::get('role/{role_id}', 'RoleController@getRole');
 
-Route::delete('language/{language_id}', 'LanguageController@deleteLanguage');
+    Route::post('role', 'RoleController@postRole');
 
+    Route::put('role/{role_id}', 'RoleController@putRole');
 
-Route::get('roles', 'RoleController@getRoles');
+    Route::delete('role/{role_id}', 'RoleController@deleteRole');
+});
 
-Route::get('role/{role_id}', 'RoleController@getRole');
+Route::group(['prefix' => 'permission'], function () {
+    Route::get('permissions', 'PermissionController@getPermissions');
 
-Route::post('role', 'RoleController@postRole');
+    Route::post('permission', 'PermissionController@postPermission');
 
-Route::put('role/{role_id}', 'RoleController@putRole');
+    Route::put('permission/{permission_id}', 'PermissionController@putPermission');
 
-Route::delete('role/{role_id}', 'RoleController@deleteRole');
+    Route::delete('permission/{permission_id}', 'PermissionController@deletePermission');
+});
 
+Route::group(['prefix' => 'option'], function () {
+    Route::get('options', 'SiteOptionsController@getOptions');
 
-Route::get('permissions', 'PermissionController@getPermissions');
+    Route::post('option', 'SiteOptionsController@postOption');
 
-Route::post('permission', 'PermissionController@postPermission');
+    Route::put('option/{option_key}', 'SiteOptionsController@putOption');
 
-Route::put('permission/{permission_id}', 'PermissionController@putPermission');
+    Route::delete('option/{option_key}', 'SiteOptionsController@deleteOption');
+});
 
-Route::delete('permission/{permission_id}', 'PermissionController@deletePermission');
